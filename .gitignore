@@ -1,0 +1,11 @@
+# Gradle specific files
+.gradle
+gradlew
+gradlew.bat
+gradle
+
+# builded files
+build
+bin
+logs
+**/*.jasper

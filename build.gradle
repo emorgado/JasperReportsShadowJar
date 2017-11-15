@@ -1,0 +1,81 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'application'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "http://jaspersoft.artifactoryonline.com/jaspersoft/third-party-ce-artifacts/" }
+}
+
+ext {
+    author = 'Emerson Jose Morgado Brito'
+    description = 'Sample app to demonstate the use of JasperReports inside a Uber Jar'
+}
+
+group = 'br.com.emorgado.jrsj'
+version = '1.0-SNAPSHOT'
+mainClassName = 'br.com.emorgado.jrsj.App'
+
+targetCompatibility = '1.8'
+sourceCompatibility = '1.8'
+
+dependencies {
+    
+    //Lombok plugin
+    compile 'org.projectlombok:lombok:1.16.16'
+
+    //Log config
+    compile 'org.apache.logging.log4j:log4j-api:2.8.2'
+    compile 'org.apache.logging.log4j:log4j-core:2.8.2'
+
+    //Log config yml
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.7.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.4'
+    
+    // JasperReports
+    compile ('net.sf.jasperreports:jasperreports:6.4.3')
+    compile ('net.sf.jasperreports:jasperreports-fonts:6.0.0')
+    
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+}
+
+def manifestClasspath = configurations.compile.collect { it.getName() }.join(' ')               //TODO: o QUE É TUDO ISSO ABAIXO?
+jar {
+    manifest {
+        attributes "Specification-Title" : name,
+                "Specification-Version"  : version,
+                "Specification-Vendor"   : author,
+                "Implementation-Title"   : name,
+                "Implementation-Version" : version,
+                "Implementation-Vendor"  : author,
+                'Created-By'             : author,
+                'Description'            : description,
+                'Class-Path'             : manifestClasspath,
+                'Main-Class'             : mainClassName
+    }
+}
+applicationDistribution.from("$projectDir") {
+    include 'README.MD'
+}
+shadowJar {    
+    baseName = 'JasperReportShadow'
+    classifier = 'jar'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.2'
+}
