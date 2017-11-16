@@ -79,6 +79,14 @@ public class ReportGeneratorService
             @Override
             protected List< File > call() throws Exception {
 
+                /**
+                 *  Report template could be a compiled one as *.jasper
+                 *  or could be just the template in jrxml.
+                 *  
+                 *   if .jasper is available, use it or else compile the .jrxml.
+                 * 
+                 */
+                
                 List< File > generatedReports = new ArrayList<>();
 
                 updateMessage( "Generating report!" );
@@ -88,10 +96,10 @@ public class ReportGeneratorService
                 File generatedFile = null;
 
                 // Create Report
-                String reportTemplatePathName = "reports/simpleBeanReport.jrxml";
+                String reportTemplatePathName = "reports/simpleBeanReport";
                 String filePathName = System.getProperty( "user.home" ) + File.separator + "Downloads"+File.separator+"SimpleBeanReport-" + new Date().getTime() + ".pdf";
 
-                reportTemplatePathName = reportTemplatePathName.replace( "jrxml", "jasper" );
+                // reportTemplatePathName = reportTemplatePathName.replace( "jrxml", "jasper" );
 
                 logger.debug( " generateReport template: {}, records: {}, filePath: {}", reportTemplatePathName, data.size(), filePathName );
 
@@ -99,15 +107,17 @@ public class ReportGeneratorService
                 updateProgress( 65, 100 );
                 Thread.sleep( 200 );
 
-                InputStream is = null;
-                if ( reportTemplatePathName.endsWith( "jrxml" ) ) {
+                
+                boolean usingCompiledTemplate = true;
+                InputStream is = ClassLoader.getSystemResourceAsStream( reportTemplatePathName+".jasper" );
+                
+                if( is == null ) {
+                    usingCompiledTemplate = false;
                     is = getClass().getClassLoader()
-                                   .getResourceAsStream( reportTemplatePathName );
-
-                } else {
-                    is = ClassLoader.getSystemResourceAsStream( reportTemplatePathName ); // Traz o resource no jar
+                            .getResourceAsStream( reportTemplatePathName+".jrxml" );
+                    
                 }
-
+                
                 // System.out.println( "IS \n"+getStringFromInputStream( is ) );
 
                 if ( is == null ) {
@@ -116,7 +126,7 @@ public class ReportGeneratorService
                     updateProgress( 100, 100 );
                     Thread.sleep( 200 );
 
-                    logger.error( "Report template file {} not found!", reportTemplatePathName );
+                    logger.error( "Report template file {} '.jasper|.jrxml' not found!", reportTemplatePathName );
                     
                     return null;
 
@@ -135,22 +145,26 @@ public class ReportGeneratorService
                         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource( data );
 
                         JasperReport jasperReport = null;
-
-                        if ( reportTemplatePathName.endsWith( "jrxml" ) ) {
-
-                            JasperDesign jasperDesign = JRXmlLoader.load( is );
-
-                            jasperReport = JasperCompileManager.compileReport( jasperDesign );
-
-                        } else {
-
+                        
+                        logger.debug( "Using Compiled Template? {} ", usingCompiledTemplate );
+                        if ( usingCompiledTemplate ) {
+                            
+                            updateMessage( "Loging compiled template!" );
                             jasperReport = (JasperReport) JRLoader.loadObject( is );
 
+                        } else {
+                            
+                            updateMessage( "Compiling template!" );
+                            JasperDesign jasperDesign = JRXmlLoader.load( is );
+                            jasperReport = JasperCompileManager.compileReport( jasperDesign );
+
                         }
+                        updateProgress( 77, 100 );
+                        Thread.sleep( 250 );
 
                         updateMessage( "Setting metadata and parameters!" );
                         updateProgress( 80, 100 );
-                        Thread.sleep( 200 );
+                        Thread.sleep( 100 );
 
                         jasperReport.setProperty( "net.sf.jasperreports.export.pdf.metadata.title", "People's" );
                         jasperReport.setProperty( "net.sf.jasperreports.export.pdf.metadata.subject", "Example of report regerated with jasperreports on a shadow jar" );
