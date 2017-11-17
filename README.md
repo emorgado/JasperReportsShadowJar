@@ -30,6 +30,10 @@ Please contact-me if you need some help or just want to contribute with somethin
 - JasperReports
 - Log4j2, configured with yml file
 
+# Roadmap
+
+- Compile reports and remove .jrxml from jar
+
 # Licence
 
 This projet is licenced under [MIT Licence](https://choosealicense.com/licenses/mit/).
