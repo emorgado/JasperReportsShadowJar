@@ -19,7 +19,7 @@
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="30" uuid="9d34385b-e7c7-41de-9fc6-467c484d50b7"/>
 				<textElement verticalAlignment="Middle">
-					<font size="16"/>
+					<font fontName="Dosis" size="16"/>
 				</textElement>
 				<text><![CDATA[People's]]></text>
 			</staticText>

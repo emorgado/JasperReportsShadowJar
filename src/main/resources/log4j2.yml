@@ -32,3 +32,5 @@ Configutation:
     Logger:
     - name: br.com.emorgado.jrsj.controllers
       level: debug
+    - name: net.sf.jasperreports
+      level: debug

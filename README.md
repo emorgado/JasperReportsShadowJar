@@ -6,9 +6,11 @@ It is a JavaFx project where you can press a button, see the progress on a progr
 
 Two services was created one to load data and other to generate the report.
 
-This two services show their process on the same progress bar. 
+This two services show their process on the same progress bar.
 
 I used gradle to automate project execution and distribution.
+
+The project uses custom jasperreports properties to configure custom fonts to be used in reports and distributed with uber JarApp. 
 
 # Running
 
@@ -36,4 +38,4 @@ Please contact-me if you need some help or just want to contribute with somethin
 
 # Licence
 
-This projet is licenced under [MIT Licence](https://choosealicense.com/licenses/mit/).
+This project is licensed under [MIT License](https://choosealicense.com/licenses/mit/).

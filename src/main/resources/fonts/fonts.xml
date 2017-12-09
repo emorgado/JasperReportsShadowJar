@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontFamilies>
+    <fontFamily name="Dosis">
+        <normal>fonts/Dosis/Dosis-Regular.ttf</normal>
+        <bold>fonts/Dosis/Dosis-Bold.ttf</bold>
+        <italic>fonts/Dosis/Dosis-ExtraLight.ttf</italic>
+        <boldItalic>fonts/Dosis/Dosis-Light.ttf</boldItalic>
+        <pdfEncoding>Identity-H</pdfEncoding>
+        <pdfEmbedded>true</pdfEmbedded>
+    </fontFamily>
+</fontFamilies>
