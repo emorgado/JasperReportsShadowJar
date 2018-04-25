@@ -1,5 +1,6 @@
 package br.com.emorgado.jrsj.services;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,19 +53,19 @@ public class PeopleLoaderService
                 updateProgress( 10, 100 );
                 Thread.sleep( 1000 );
                 
-                data.add( new People( "Emerson", "Morgado Brito") );
+                data.add( new People( "Emerson", "Morgado Brito", LocalDate.of(1980, 10, 1)) );
                 
                 updateMessage("Getting data!");
                 updateProgress( 10, 100 );
                 Thread.sleep( 500 );
                 
-                data.add( new People( "Angela", "Dias Brito") );
+                data.add( new People( "Angela", "Dias Brito", LocalDate.of(1984, 4, 4)) );
                 
                 updateMessage("Filling reponse list!");
                 updateProgress( 20, 100 );
                 Thread.sleep( 500 );
                 
-                data.add( new People( "Julia", "Dias Brito") );
+                data.add( new People( "Julia", "Dias Brito", LocalDate.of(2018, 5, 30)) );
                 
                 updateMessage("Data aquisition complete!");
                 updateProgress( 50, 100 );

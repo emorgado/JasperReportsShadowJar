@@ -39,3 +39,8 @@ Please contact-me if you need some help or just want to contribute with somethin
 # Licence
 
 This project is licensed under [MIT License](https://choosealicense.com/licenses/mit/).
+
+# Changelog
+
+2018-04-12 - Added a LocalDate field to report, to show how to use date formats on jasperreports.
+

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.4.3.final using JasperReports Library version 6.4.3  -->
+<!-- Created with Jaspersoft Studio version 6.5.1.final using JasperReports Library version 6.5.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="simpleBeanReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="623b2769-0dd5-4068-8806-7fd722f7b4ff">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ReportData Datasource"/>
 	<queryString>
@@ -11,6 +11,7 @@
 	<field name="name" class="java.lang.String">
 		<fieldDescription><![CDATA[name]]></fieldDescription>
 	</field>
+	<field name="birthDate" class="java.time.LocalDate"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -26,9 +27,9 @@
 		</band>
 	</title>
 	<columnHeader>
-		<band height="20" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
-				<reportElement x="277" y="0" width="278" height="20" uuid="620e029b-3b07-452d-bec1-83cec521a21a">
+				<reportElement x="210" y="0" width="250" height="20" uuid="620e029b-3b07-452d-bec1-83cec521a21a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d79ab6b3-4ca6-4ac3-b1a8-5fb81b74576e"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -38,7 +39,7 @@
 				<text><![CDATA[surname]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="0" width="277" height="20" uuid="3b5b87ca-3512-46c1-9def-b97c06890f82">
+				<reportElement x="0" y="0" width="210" height="20" uuid="3b5b87ca-3512-46c1-9def-b97c06890f82">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c433d35-1095-4281-81a8-fe6061a34aab"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -47,12 +48,25 @@
 				</textElement>
 				<text><![CDATA[name]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="460" y="2" width="94" height="20" uuid="65c755d7-74d9-47cc-8213-8c5c040cc01a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d79ab6b3-4ca6-4ac3-b1a8-5fb81b74576e"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Birth date]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="f883cb8e-d682-49f2-83cd-fbd3a89db133"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField>
-				<reportElement x="277" y="0" width="278" height="20" uuid="f9b9e95a-7884-49f7-a14b-3ed9794120fd">
+				<reportElement x="210" y="0" width="250" height="20" uuid="f9b9e95a-7884-49f7-a14b-3ed9794120fd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d79ab6b3-4ca6-4ac3-b1a8-5fb81b74576e"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -60,12 +74,20 @@
 				<textFieldExpression><![CDATA[$F{surname}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="277" height="20" uuid="d318b43b-f96c-44cd-a107-6a88a3cfa8c9">
+				<reportElement x="0" y="0" width="210" height="20" uuid="d318b43b-f96c-44cd-a107-6a88a3cfa8c9">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4c433d35-1095-4281-81a8-fe6061a34aab"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="94" height="20" uuid="02e57008-0ca9-4a74-a56c-38215b6dbc52">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d79ab6b3-4ca6-4ac3-b1a8-5fb81b74576e"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{birthDate}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -1,5 +1,7 @@
 package br.com.emorgado.jrsj.model;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -36,5 +38,5 @@ public class People {
 
     String name;
     String surname;
-   
+    LocalDate birthDate; 
 }
