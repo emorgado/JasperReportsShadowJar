@@ -54,7 +54,7 @@ dependencies {
 }
 
 def manifestClasspath = configurations.compile.collect { it.getName() }.join(' ') 
-jar {
+jar {    
     manifest {
         attributes "Specification-Title" : name,
                 "Specification-Version"  : version,
@@ -71,6 +71,40 @@ jar {
 applicationDistribution.from("$projectDir") {
     include 'README.MD'
 }
+
+
+
+task compileReports( dependsOn: 'cleanReports') {
+    doLast {
+        println "Compiling jasper reports"
+        def jasperSourceDir = file('src/main/resources/reports')
+        def jasperTargetDir = file('src/main/resources/reports') // I leave in the same folder because jasperdesigner compiles here to
+        ant {
+            taskdef(     name: 'compileJasperReports',
+                    classname: 'net.sf.jasperreports.ant.JRAntCompileTask',
+                    classpath: configurations.compile.asPath )
+            
+            // jasperTargetDir.mkdirs()
+            
+            compileJasperReports(  srcdir: jasperSourceDir, destdir: jasperTargetDir ) {               
+                classpath(path: sourceSets.main.output.classesDir)
+                include(name: '**/*.jrxml')
+            }
+        }
+    }
+}
+task cleanReports(){
+    doLast(){
+        println "Cleaning compiled jasper reports... "
+        delete fileTree('src/main/resources/reports'){
+            include '**/*.jasper'
+        }
+        println "Jasper reports successfully cleared!"
+    }
+}
+
+processResources.dependsOn compileReports
+
 shadowJar {    
     baseName = 'JasperReportShadow'
     classifier = 'jar'
@@ -88,6 +122,7 @@ shadowJar {
     exclude 'README*'
     exclude 'properties-metadata.json'
     exclude 'application-context.xml'
+    exclude("reports/**/*.jrxml")
 }
 
 task wrapper(type: Wrapper) {

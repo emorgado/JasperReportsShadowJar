@@ -34,7 +34,7 @@ Please contact-me if you need some help or just want to contribute with somethin
 
 # Roadmap
 
-- Compile reports and remove .jrxml from jar
+- Compile reports and remove .jrxml from jar (DONE)
 
 # Licence
 
@@ -42,5 +42,6 @@ This project is licensed under [MIT License](https://choosealicense.com/licenses
 
 # Changelog
 
+2018-04-25 - Changed gradle build script to compile and remove jrxml files from generated jar.
 2018-04-12 - Added a LocalDate field to report, to show how to use date formats on jasperreports.
 
