@@ -8,15 +8,17 @@ Two services was created one to load data and other to generate the report.
 
 This two services show their process on the same progress bar.
 
-I used gradle to automate project execution and distribution.
+It uses maven to automate project execution and distribution.
 
 The project uses custom jasperreports properties to configure custom fonts to be used in reports and distributed with uber JarApp. 
 
 # Running
 
-I'm not versioning gradle binary, so you will need a local gradle installed, then to use a correct gradle version, you can run `gradle wraper`, after that use use `.gradlew` to execute gradle tasks.
+```bash
+mvn clean javafx:run
+```
 
-After clone you can use eclipse, intellij or any other IDE ( or editor ), to access project folder and type `./gradlew run`, all dependencies will be handled by gradle, and the project window will be opened.
+After clone you can use any maven IDE ( or editor ), to access project folder and type `mvn clean javafx:run`, all dependencies will be handled by gradle, and the project window will be opened.
 
 # Contributing
 
@@ -24,9 +26,9 @@ Please contact-me if you need some help or just want to contribute with somethin
 
 # This project uses
 
-- Gradle
-- [Gradle Shaddow plugin](https://github.com/johnrengelman/shadow)
-- Java >= 8
+- Maven
+- Maven Shade Plugin
+- Java 22
 - Lombok  
 - JavaFX
 - JasperReports
@@ -34,7 +36,7 @@ Please contact-me if you need some help or just want to contribute with somethin
 
 # Roadmap
 
-- Compile reports and remove .jrxml from jar (DONE)
+- [x] Compile reports and remove .jrxml from jar
 
 # Licence
 
@@ -44,4 +46,11 @@ This project is licensed under [MIT License](https://choosealicense.com/licenses
 
 2018-04-25 - Changed gradle build script to compile and remove jrxml files from generated jar.
 2018-04-12 - Added a LocalDate field to report, to show how to use date formats on jasperreports.
+2024-07-20 - Removed gradle and added maven to project, upgraded to java 22.
 
+# Maven notes
+
+```bash
+# To execute maven in debug mode
+mvn -X clean package
+```
